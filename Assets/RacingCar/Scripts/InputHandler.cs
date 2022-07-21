@@ -4,13 +4,15 @@ namespace RacingCar
 {
     public class InputHandler : MonoBehaviour
     {
-        private Vector2 _playerInput;
+        private Vector3 _playerInput;
+        private float _break;
 
-        public Vector2 PlayerInput { get => _playerInput; }
+        public Vector3 PlayerInput { get => _playerInput; }
 
         private void Update()
         {
-            _playerInput = new Vector2(Input.GetAxisRaw("vertical"), Input.GetAxisRaw("horizontal"));
+            _break = Input.GetKey(KeyCode.Space) ? 1f : 0f;
+            _playerInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), _break);
         }
     }
 }
