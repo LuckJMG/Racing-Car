@@ -6,17 +6,19 @@ namespace RacingCar
     public class CameraFollow : MonoBehaviour
     {
         [SerializeField] private Transform target;
-        [SerializeField] private Vector3 offset;
-        [SerializeField] private float translateSpeed;
-        [SerializeField] private float rotationSpeed;
+        [SerializeField] private Vector3 positionOffset = new Vector3(0, 4, -5);
+        [SerializeField] private Vector3 rotationOffset = new Vector3(0, 2, 0);
+        [Range(.01f, 1f)] [SerializeField] private float translationTime = .1f;
+        [Range(1f, 20f)] [SerializeField] private float rotationSpeed = 10f;
         private Transform _transform;
+        private Vector3 _currentTranslationVelocity;
 
         private void Awake()
         {
             _transform = transform;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             HandleTranslation();
             HandleRotation();
@@ -24,15 +26,15 @@ namespace RacingCar
 
         private void HandleTranslation()
         {
-            var targetPosition = target.TransformPoint(offset);
-            _transform.position = Vector3.Lerp(_transform.position, targetPosition, Time.deltaTime * translateSpeed);
+            var targetPosition = target.TransformPoint(positionOffset);
+            _transform.position = Vector3.SmoothDamp(_transform.position, targetPosition, ref _currentTranslationVelocity, translationTime);
         }
 
         private void HandleRotation()
         {
-            var direction = target.position - _transform.position;
-            var rotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.Lerp(_transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+            var direction = target.position - _transform.position + rotationOffset;
+            var rotation = Quaternion.LookRotation(direction, rotationOffset);
+            transform.rotation = Quaternion.Slerp(_transform.rotation, rotation, Time.deltaTime * rotationSpeed);
         }
     }
 }

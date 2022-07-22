@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Main Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -335,8 +335,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1061608871}
-  offset: {x: 0, y: 5, z: -10}
-  translateSpeed: 10
+  positionOffset: {x: 0, y: 4, z: -5}
+  rotationOffset: {x: 0, y: 2, z: 0}
+  translationTime: 0.1
   rotationSpeed: 10
 --- !u!1001 &1012126664
 PrefabInstance:
@@ -415,7 +416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2806714669947893885, guid: bb8ba48e092f3ab4dbab0335142bdcaf, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2806714669947893885, guid: bb8ba48e092f3ab4dbab0335142bdcaf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -521,7 +522,7 @@ GameObject:
   - component: {fileID: 2138623554}
   - component: {fileID: 2138623553}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
