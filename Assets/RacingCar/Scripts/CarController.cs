@@ -4,11 +4,15 @@ namespace RacingCar
 {
     public class CarController : MonoBehaviour
     {
-        [SerializeField] private float motorForce;
-        [SerializeField] private float breakForce;
-        [SerializeField] private float maxSteeringAngle;
+        [SerializeField] private float maxSpeed = 100f;
+        [SerializeField] private float acceleration = 10f;
+        [SerializeField] private AnimationCurve accelerationCurve;
+        [SerializeField] private float breakForce = 3000f;
+        [SerializeField] private float maxSteeringAngle = 30f;
+        [SerializeField] private float steeringSpeed = 10f;
         [SerializeField] private WheelCollider[] wheelColliders = new WheelCollider[4];
-        [SerializeField] private Transform[] wheelTransforms = new Transform[4];
+        private float _currentSpeed;
+        private float _currentSteeringAngle;
         private InputHandler _inputHandler;
         private Vector3 _playerInput;
 
@@ -24,14 +28,14 @@ namespace RacingCar
 
             HandleMotor();
             HandleSteering();
-            UpdateWheels();
         }
 
         private void HandleMotor()
         {
-            var currentMotorForce = _playerInput.y * motorForce;
-            wheelColliders[0].motorTorque = currentMotorForce;
-            wheelColliders[1].motorTorque = currentMotorForce;
+            var targetSpeed = _playerInput.y * maxSpeed * 100;
+            _currentSpeed = Mathf.Lerp(_currentSpeed, targetSpeed, accelerationCurve.Evaluate(Time.deltaTime * acceleration));
+            wheelColliders[0].motorTorque = _currentSpeed;
+            wheelColliders[1].motorTorque = _currentSpeed;
             ApplyBreaking();
         }
 
@@ -46,22 +50,10 @@ namespace RacingCar
 
         private void HandleSteering()
         {
-            var currentSteeringAngle = maxSteeringAngle * _playerInput.x;
-            wheelColliders[0].steerAngle = currentSteeringAngle;
-            wheelColliders[1].steerAngle = currentSteeringAngle;
-        }
-
-        private void UpdateWheels()
-        {
-            for (var i = 0; i < wheelTransforms.Length; i++)
-            {
-                Vector3 position;
-                Quaternion rotation;
-                wheelColliders[i].GetWorldPose(out position, out rotation);
-
-                wheelTransforms[i].position = position;
-                wheelTransforms[i].rotation = rotation;
-            }
+            var targetSteeringAngle = maxSteeringAngle * _playerInput.x;
+            _currentSteeringAngle = Mathf.LerpAngle(_currentSteeringAngle, targetSteeringAngle, Time.deltaTime * steeringSpeed);
+            wheelColliders[0].steerAngle = _currentSteeringAngle;
+            wheelColliders[1].steerAngle = _currentSteeringAngle;
         }
     }
 }

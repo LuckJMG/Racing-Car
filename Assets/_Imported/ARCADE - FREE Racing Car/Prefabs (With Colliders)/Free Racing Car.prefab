@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 2792218741957914664}
   - component: {fileID: 4771621203064062184}
   - component: {fileID: 496340041330531360}
+  - component: {fileID: 7871636543957586976}
   - component: {fileID: 7495443279060062592}
   m_Layer: 0
   m_Name: Free Racing Car
@@ -511,6 +512,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1bda8c9d7e3ef42b476f96a92584b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 100
+  acceleration: 10
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  breakForce: 3000
+  maxSteeringAngle: 30
+  steeringSpeed: 10
+  wheelColliders:
+  - {fileID: 2716459193614891142}
+  - {fileID: 4795950753765878369}
+  - {fileID: 3145262460232535540}
+  - {fileID: 1057494946909100755}
+--- !u!114 &7871636543957586976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311311803080157842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4880731846c445c4094cf5af988f6de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelColliders:
+  - {fileID: 2716459193614891142}
+  - {fileID: 4795950753765878369}
+  - {fileID: 3145262460232535540}
+  - {fileID: 1057494946909100755}
+  wheelTransforms:
+  - {fileID: 3794951908810334882}
+  - {fileID: 948405438201742482}
+  - {fileID: 9188640840458259854}
+  - {fileID: 28636839611146925}
 --- !u!54 &7495443279060062592
 Rigidbody:
   m_ObjectHideFlags: 0

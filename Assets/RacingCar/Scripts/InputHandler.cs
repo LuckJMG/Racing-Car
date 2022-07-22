@@ -12,7 +12,7 @@ namespace RacingCar
         private void Update()
         {
             _break = Input.GetKey(KeyCode.Space) ? 1f : 0f;
-            _playerInput = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), _break);
+            _playerInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), _break);
         }
     }
 }
